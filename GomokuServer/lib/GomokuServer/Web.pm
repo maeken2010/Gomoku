@@ -42,6 +42,11 @@ __PACKAGE__->add_trigger(
 
         # Cache control.
         $res->header( 'Cache-Control' => 'private' );
+
+        $res->header( 'Access-Control-Allow-Origin' => '*' );
+        $res->header( 'Access-Control-Allow-Methods' => 'DELETE, POST, GET, OPTIONS' );
+        $res->header( 'Access-Control-Allow-Headers' => 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With' );
+        $res->header( 'Access-Control-Max-Age' => '86400' );
     },
 );
 

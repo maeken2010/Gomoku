@@ -4,6 +4,17 @@ use warnings;
 use utf8;
 use Amon2::Web::Dispatcher::RouterBoom;
 
+use DDP;
+
+get '/api/battle' => sub {
+    my ($c) = @_;
+    p $c;
+    return $c->render_json({
+        id   => 1,
+        status => "ok"
+    });
+};
+
 post '/api/battle' => sub {
     my ($c) = @_;
 
@@ -23,8 +34,7 @@ post '/api/battle' => sub {
     my $id = $c->db->fast_insert(battle_logs => $battle_log);
 
     return $c->render_json({
-        id   => $id,
-        status => "ok"
+        id   => $id
     });
 };
 

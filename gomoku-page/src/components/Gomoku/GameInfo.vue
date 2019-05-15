@@ -1,7 +1,7 @@
 <template>
   <div>
     <p v-if="this.isEnd">end!</p>
-    <p>current turn : {{ this.turn ? "hogeRed" : "piyoBlue" }}</p>
+    <p>current turn : {{ this.turn === 1 ? "hogeRed" : "piyoBlue" }}</p>
   </div>
 </template>
 

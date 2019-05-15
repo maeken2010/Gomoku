@@ -1,3 +1,5 @@
+import { postBattleLog } from "@/lib/api/gomokuAPI";
+
 const state = {
   cells: [],
   isEnd: false
@@ -30,8 +32,16 @@ const getters = {
   }
 };
 
+const actions = {
+  async postBattleLog({ commit }, payload) {
+    await postBattleLog(payload);
+    commit("changeGameEnd");
+  }
+};
+
 export default {
   state,
   mutations,
-  getters
+  getters,
+  actions
 };

@@ -25,7 +25,7 @@
 import isGameEnd from "./calc_gomoku.js";
 import cell from "./Cell";
 import gameInfo from "./GameInfo";
-import { mapGetters, mapMutations } from "vuex";
+import { mapGetters, mapMutations, mapActions } from "vuex";
 
 export default {
   name: "Gomoku",
@@ -35,7 +35,7 @@ export default {
   },
   data: function() {
     return {
-      turn: true,
+      turn: 1,
       boardSizeList: [5, 10, 20],
       pickedSize: 10
     };
@@ -48,25 +48,26 @@ export default {
   },
   methods: {
     ...mapMutations(["changeGameEnd", "initCells", "changeCell"]),
+    ...mapActions(["postBattleLog"]),
     initGame: function(size) {
       this.initCells({ boardSize: size });
-      this.turn = true;
+      this.turn = 1;
     },
     isGameEnd: function(cells) {
       return isGameEnd(cells);
     },
     changeColor: function(n, m, cell) {
       if (this.isEnd || cell !== 0) return;
-      const cellColor = this.turn ? 1 : 2;
+      const cellColor = this.turn === 1 ? 1 : 2;
 
       this.changeCell({ n, m, cellColor });
 
       if (this.isGameEnd(this.cells)) {
         console.log("end!");
-        this.changeGameEnd();
+        this.postBattleLog({ winner: this.turn, name1: "a", name2: "b" });
       }
 
-      this.turn = !this.turn;
+      this.turn = this.turn === 1 ? 2 : 1;
     }
   },
   watch: {
