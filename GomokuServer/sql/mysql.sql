@@ -1,4 +1,7 @@
-CREATE TABLE IF NOT EXISTS member (
+CREATE TABLE IF NOT EXISTS battle_logs (
     id           INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    name         VARCHAR(255)
+    name1        VARCHAR(255),
+    name2        VARCHAR(255),
+    result       BOOLEAN,
+    created_at   DATETIME default current_timestamp
 );

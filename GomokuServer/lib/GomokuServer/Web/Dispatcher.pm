@@ -4,26 +4,28 @@ use warnings;
 use utf8;
 use Amon2::Web::Dispatcher::RouterBoom;
 
-any '/' => sub {
+post '/api/battle' => sub {
     my ($c) = @_;
-    my $counter = $c->session->get('counter') || 0;
-    $counter++;
-    $c->session->set('counter' => $counter);
-    return $c->render('index.tx', {
-        counter => $counter,
+
+    my $name1 = $c->req->parameters->{name1}
+        or return $c->res_400_json;
+    my $name2 = $c->req->parameters->{name2}
+        or return $c->res_400_json;
+    my $result = $c->req->parameters->{result}
+        or return $c->res_400_json;
+
+    my $battle_log = {
+        name1 => $name1,
+        name2 => $name2,
+        result => $result
+    };
+
+    my $id = $c->db->fast_insert(battle_logs => $battle_log);
+
+    return $c->render_json({
+        id   => $id,
+        status => "ok"
     });
-};
-
-post '/reset_counter' => sub {
-    my $c = shift;
-    $c->session->remove('counter');
-    return $c->redirect('/');
-};
-
-post '/account/logout' => sub {
-    my ($c) = @_;
-    $c->session->expire();
-    return $c->redirect('/');
 };
 
 1;

@@ -15,7 +15,7 @@ sub dispatch {
 __PACKAGE__->load_plugins(
     'Web::FillInFormLite',
     'Web::JSON',
-    '+GomokuServer::Web::Plugin::Session',
+    '+GomokuServer::Web::Plugin::Response',
 );
 
 # setup view
