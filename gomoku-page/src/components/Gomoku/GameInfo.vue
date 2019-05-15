@@ -1,22 +1,18 @@
 <template>
   <div>
-    <p v-if="this.isEnd"> end! </p>
-    <p> current turn : {{ this.turn ? "hogeRed" : "piyoBlue" }} </p>
+    <p v-if="this.isEnd">end!</p>
+    <p>current turn : {{ this.turn ? "hogeRed" : "piyoBlue" }}</p>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters } from "vuex";
 export default {
-  props: ['turn'],
+  props: ["turn"],
   computed: {
-    ...mapGetters([
-      'isEnd'
-    ])
+    ...mapGetters(["isEnd"])
   }
-}
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -4,13 +4,13 @@
 
 <script>
 export default {
-  props: ['color'],
+  props: ["color"],
   computed: {
-    colorClass: function () {
-      return ['white', 'red', 'blue'][this.color]
+    colorClass: function() {
+      return ["white", "red", "blue"][this.color];
     }
   }
-}
+};
 </script>
 
 <style scoped>
