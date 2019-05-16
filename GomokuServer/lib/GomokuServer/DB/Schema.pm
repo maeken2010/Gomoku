@@ -10,7 +10,7 @@ base_row_class 'GomokuServer::DB::Row';
 table {
     name 'battle_logs';
     pk 'id';
-    columns qw(id first_player second_plauer result finished_at);
+    columns qw(id first_player second_player result finished_at);
 };
 
 1;

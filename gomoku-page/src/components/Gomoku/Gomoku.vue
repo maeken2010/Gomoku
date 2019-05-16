@@ -41,7 +41,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["isEnd", "cells"])
+    ...mapGetters(["isEnd", "cells", "players"])
   },
   created: function() {
     this.initCells({ boardSize: this.pickedSize });
@@ -64,10 +64,12 @@ export default {
 
       if (this.isGameEnd(this.cells)) {
         console.log("end!");
+
+        const { first_player, second_player } = this.players;
         this.postBattleLog({
           result: this.turn,
-          first_player: "a",
-          second_plauer: "b"
+          first_player,
+          second_player
         });
       }
 

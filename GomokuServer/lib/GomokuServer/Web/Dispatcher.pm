@@ -20,14 +20,14 @@ post '/api/battle' => sub {
 
     my $first_player = $c->req->parameters->{first_player}
         or return $c->res_400_json;
-    my $second_plauer = $c->req->parameters->{second_plauer}
+    my $second_player = $c->req->parameters->{second_player}
         or return $c->res_400_json;
     my $result = $c->req->parameters->{result}
         or return $c->res_400_json;
 
     my $battle_log = {
         first_player => $first_player,
-        second_plauer => $second_plauer,
+        second_player => $second_player,
         result => $result
     };
 

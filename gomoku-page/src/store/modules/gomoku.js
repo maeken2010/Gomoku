@@ -1,6 +1,8 @@
 import { postBattleLog } from "@/lib/api/gomokuAPI";
 
 const state = {
+  first_player: "",
+  second_player: "",
   cells: [],
   isEnd: false
 };
@@ -17,6 +19,10 @@ const mutations = {
   },
   changeCell: (state, { n, m, cellColor }) => {
     state.cells[n][m] = cellColor;
+  },
+  setPlayer: (state, { first_player, second_player }) => {
+    state.first_player = first_player;
+    state.second_player = second_player;
   }
 };
 
@@ -29,6 +35,12 @@ const getters = {
   },
   boardSize: state => {
     return state.cells.length;
+  },
+  players: state => {
+    return {
+      first_player: state.first_player,
+      second_player: state.second_player
+    };
   }
 };
 

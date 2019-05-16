@@ -1,7 +1,10 @@
 <template>
   <div>
     <p v-if="this.isEnd">end!</p>
-    <p>current turn : {{ this.turn === 1 ? "hogeRed" : "piyoBlue" }}</p>
+    <p>
+      current turn :
+      {{ this.turn === 1 ? players.first_player : players.second_player }}
+    </p>
   </div>
 </template>
 
@@ -10,7 +13,7 @@ import { mapGetters } from "vuex";
 export default {
   props: ["turn"],
   computed: {
-    ...mapGetters(["isEnd"])
+    ...mapGetters(["isEnd", "players"])
   }
 };
 </script>
