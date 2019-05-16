@@ -13,4 +13,10 @@ table {
     columns qw(id first_player second_player result finished_at);
 };
 
+table {
+    name 'game_records';
+    pk 'id';
+    columns qw(id battle_id turn turn_number x y);
+};
+
 1;

@@ -1,9 +1,10 @@
-import { postBattleLog } from "@/lib/api/gomokuAPI";
+import { postBattleLog, postRecords } from "@/lib/api/gomokuAPI";
 
 const state = {
   first_player: "",
   second_player: "",
   cells: [],
+  records: [],
   isEnd: false
 };
 
@@ -23,6 +24,9 @@ const mutations = {
   setPlayer: (state, { first_player, second_player }) => {
     state.first_player = first_player;
     state.second_player = second_player;
+  },
+  pushRecord: (state, { n, m, turn, turn_number }) => {
+    state.records.push({ x: n, y: m, turn, turn_number });
   }
 };
 
@@ -45,8 +49,10 @@ const getters = {
 };
 
 const actions = {
-  async postBattleLog({ commit }, payload) {
-    await postBattleLog(payload);
+  async finishGame({ commit, state }, payload) {
+    const { battle_log } = payload;
+    const { id } = await postBattleLog(battle_log);
+    await postRecords(id, state.records);
     commit("changeGameEnd");
   }
 };

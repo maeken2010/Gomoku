@@ -35,7 +35,8 @@ export default {
   },
   data: function() {
     return {
-      turn: 1,
+      turn: 1, // 先手：1 後手：2
+      turnNumber: 1, // 現在のターン数
       boardSizeList: [5, 10, 20],
       pickedSize: 10
     };
@@ -47,8 +48,8 @@ export default {
     this.initCells({ boardSize: this.pickedSize });
   },
   methods: {
-    ...mapMutations(["changeGameEnd", "initCells", "changeCell"]),
-    ...mapActions(["postBattleLog"]),
+    ...mapMutations(["changeGameEnd", "initCells", "changeCell", "pushRecord"]),
+    ...mapActions(["finishGame"]),
     initGame: function(size) {
       this.initCells({ boardSize: size });
       this.turn = 1;
@@ -58,21 +59,24 @@ export default {
     },
     changeColor: function(n, m, cell) {
       if (this.isEnd || cell !== 0) return;
-      const cellColor = this.turn === 1 ? 1 : 2;
+      this.pushRecord({ n, m, turn: this.turn, turn_number: this.turnNumber });
 
+      const cellColor = this.turn;
       this.changeCell({ n, m, cellColor });
 
       if (this.isGameEnd(this.cells)) {
         console.log("end!");
 
         const { first_player, second_player } = this.players;
-        this.postBattleLog({
-          result: this.turn,
-          first_player,
-          second_player
+        this.finishGame({
+          battle_log: {
+            result: this.turn,
+            first_player,
+            second_player
+          }
         });
       }
-
+      this.turnNumber += 1;
       this.turn = this.turn === 1 ? 2 : 1;
     }
   },
