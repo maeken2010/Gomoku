@@ -2,6 +2,7 @@
   <div class="home">
     <img alt="logo" src="../assets/gomoku.png" />
     <gameStartForm></gameStartForm>
+    <router-link :to="{ name: 'battleLogs' }">record</router-link>
   </div>
 </template>
 

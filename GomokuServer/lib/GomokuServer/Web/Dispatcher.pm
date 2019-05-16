@@ -9,10 +9,12 @@ use DDP;
 
 get '/api/battle' => sub {
     my ($c) = @_;
-    return $c->render_json({
-        id   => 1,
-        status => "ok"
-    });
+    my @all_battle_logs = $c->db->search('battle_logs');
+    my @json = ();
+    foreach my $b (@all_battle_logs) {
+        push (@json, { id => $b->id, first_player => $b->first_player, second_player => $b->second_player, result => $b->result, finished_at => $b->finished_at });
+    }
+    return $c->render_json(\@json);
 };
 
 post '/api/battle' => sub {
@@ -36,6 +38,19 @@ post '/api/battle' => sub {
     return $c->render_json({
         id   => $id
     });
+};
+
+get '/api/battle/:id' => sub {
+    my ($c, $args) = @_;
+    my $battle_id = $args->{id}
+        or return $c->res_400_json;
+    my @records = $c->db->search('game_records', ['battle_id', $battle_id]);
+
+    my @json = ();
+    foreach my $b (@records) {
+        push (@json, { id => $b->id, battle_id => $b->battle_id, turn => $b->turn, turn_number => $b->turn_number, x => $b->x, y => $b->y });
+    }
+    return $c->render_json(\@json);
 };
 
 post '/api/record' => sub {
