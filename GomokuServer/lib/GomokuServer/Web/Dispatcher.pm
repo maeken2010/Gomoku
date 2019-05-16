@@ -18,16 +18,16 @@ get '/api/battle' => sub {
 post '/api/battle' => sub {
     my ($c) = @_;
 
-    my $name1 = $c->req->parameters->{name1}
+    my $first_player = $c->req->parameters->{first_player}
         or return $c->res_400_json;
-    my $name2 = $c->req->parameters->{name2}
+    my $second_plauer = $c->req->parameters->{second_plauer}
         or return $c->res_400_json;
     my $result = $c->req->parameters->{result}
         or return $c->res_400_json;
 
     my $battle_log = {
-        name1 => $name1,
-        name2 => $name2,
+        first_player => $first_player,
+        second_plauer => $second_plauer,
         result => $result
     };
 

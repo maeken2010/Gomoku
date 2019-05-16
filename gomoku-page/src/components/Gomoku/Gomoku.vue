@@ -64,7 +64,11 @@ export default {
 
       if (this.isGameEnd(this.cells)) {
         console.log("end!");
-        this.postBattleLog({ winner: this.turn, name1: "a", name2: "b" });
+        this.postBattleLog({
+          result: this.turn,
+          first_player: "a",
+          second_plauer: "b"
+        });
       }
 
       this.turn = this.turn === 1 ? 2 : 1;
