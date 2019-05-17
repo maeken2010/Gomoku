@@ -5,11 +5,13 @@ const record_url = "http://127.0.0.1:5000/api/record";
 
 export const postBattleLog = async ({
   result,
+  board_size,
   first_player,
   second_player
 }) => {
   var params = new URLSearchParams();
   params.append("result", result);
+  params.append("board_size", board_size);
   params.append("first_player", first_player);
   params.append("second_player", second_player);
   const res = await axios.post(battle_log_url, params);

@@ -12,7 +12,7 @@ get '/api/battle' => sub {
     my @all_battle_logs = $c->db->search('battle_logs');
     my @json = ();
     foreach my $b (@all_battle_logs) {
-        push (@json, { id => $b->id, first_player => $b->first_player, second_player => $b->second_player, result => $b->result, finished_at => $b->finished_at });
+        push (@json, { id => $b->id, first_player => $b->first_player, second_player => $b->second_player, result => $b->result, board_size => $b->board_size, finished_at => $b->finished_at });
     }
     return $c->render_json(\@json);
 };
@@ -24,12 +24,15 @@ post '/api/battle' => sub {
         or return $c->res_400_json;
     my $second_player = $c->req->parameters->{second_player}
         or return $c->res_400_json;
+    my $board_size = $c->req->parameters->{board_size}
+        or return $c->res_400_json;
     my $result = $c->req->parameters->{result}
         or return $c->res_400_json;
 
     my $battle_log = {
         first_player => $first_player,
         second_player => $second_player,
+        board_size => $board_size,
         result => $result
     };
 

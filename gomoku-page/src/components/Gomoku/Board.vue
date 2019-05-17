@@ -51,6 +51,7 @@ export default {
         this.finishGame({
           battle_log: {
             result: this.turn,
+            board_size: this.cells.length,
             first_player,
             second_player
           }

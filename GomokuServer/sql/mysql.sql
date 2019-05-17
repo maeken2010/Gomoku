@@ -3,6 +3,7 @@ CREATE TABLE IF NOT EXISTS battle_logs (
     first_player        VARCHAR(255),
     second_player       VARCHAR(255),
     result              INTEGER,
+    board_size          INTEGER,
     finished_at         DATETIME default current_timestamp
 );
 

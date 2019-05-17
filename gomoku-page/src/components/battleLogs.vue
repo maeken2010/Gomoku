@@ -1,7 +1,12 @@
 <template>
   <div>
     <div v-for="(battle, i) in this.battles" :key="i">
-      <router-link :to="{ name: 'battleLog', params: { id: battle.id } }">
+      <router-link
+        :to="{
+          name: 'battleLog',
+          params: { id: battle.id, battle }
+        }"
+      >
         {{ battle.first_player }} vs {{ battle.second_player }}
       </router-link>
     </div>
