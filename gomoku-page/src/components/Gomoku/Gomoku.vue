@@ -8,7 +8,7 @@
       :key="'turn' + this.turnNumber"
     ></board>
     <div>
-      <game-info :turn="this.turn"></game-info>
+      <game-info :turn="this.turn" :winner="this.winner"></game-info>
       <div>
         Select Board Size:
         <div v-for="(s, i) in this.boardSizeList" :key="i">
@@ -44,7 +44,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["cells", "turn", "turnNumber"])
+    ...mapGetters(["cells", "turn", "turnNumber", "winner"])
   },
   created: function() {
     this.initCells({ boardSize: this.pickedSize });

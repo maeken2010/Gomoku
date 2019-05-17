@@ -1,5 +1,8 @@
 <template>
   <div id="app">
+    <div id="header">
+      <router-link to="/">TOP PAGE</router-link>
+    </div>
     <router-view />
   </div>
 </template>
@@ -17,5 +20,9 @@
   --triad-color3: #a89d14;
   --first-color: var(--triad-color3);
   --second-color: var(--triad-color1);
+}
+
+#header {
+  margin: 15px 0px;
 }
 </style>

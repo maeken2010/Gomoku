@@ -1,5 +1,7 @@
 <template>
-  <Gomoku></Gomoku>
+  <div>
+    <Gomoku></Gomoku>
+  </div>
 </template>
 
 <script>

@@ -1,21 +1,37 @@
 <template>
   <div class="info" :class="colorClass">
-    <p v-if="this.isEnd">end!</p>
-    <p>
-      current turn player :
-      {{ this.turn === 1 ? players.first_player : players.second_player }}
-    </p>
+    <template v-if="this.isEnd">
+      <p>end!</p>
+      <p>winner: {{ this.getTurnPlayer(this.winner) }}</p>
+    </template>
+    <template v-if="!this.isEnd">
+      <p>
+        current turn player :
+        {{ this.getTurnPlayer(this.turn) }}
+      </p>
+    </template>
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
 export default {
-  props: ["turn"],
+  props: ["turn", "winner"],
   computed: {
     ...mapGetters(["isEnd", "players"]),
     colorClass: function() {
-      return ["", "first", "second"][this.turn];
+      const colorList = ["", "first", "second"];
+      if (this.winner !== 0) {
+        return colorList[this.winner];
+      }
+      return colorList[this.turn];
+    }
+  },
+  methods: {
+    getTurnPlayer: function(turn) {
+      return turn === 1
+        ? this.players.first_player
+        : this.players.second_player;
     }
   }
 };

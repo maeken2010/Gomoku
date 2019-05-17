@@ -7,11 +7,13 @@ const state = {
   records: [],
   turn: 1, // 初手：1 後手：2
   turn_number: 1,
+  winner: 0,
   isEnd: false
 };
 
 const mutations = {
-  changeGameEnd: state => {
+  changeGameEnd: (state, result) => {
+    state.winner = result;
     state.isEnd = true;
   },
   initCells: (state, { boardSize }) => {
@@ -19,6 +21,7 @@ const mutations = {
       new Array(boardSize).fill(0)
     );
     state.isEnd = false;
+    state.winner = 0;
   },
   changeCell: (state, { n, m, cellColor }) => {
     state.cells[n][m] = cellColor;
@@ -63,6 +66,9 @@ const getters = {
   },
   turnNumber: state => {
     return state.turn_number;
+  },
+  winner: state => {
+    return state.winner;
   }
 };
 
@@ -71,7 +77,7 @@ const actions = {
     const { battle_log } = payload;
     const { id } = await postBattleLog(battle_log);
     await postRecords(id, state.records);
-    commit("changeGameEnd");
+    commit("changeGameEnd", battle_log.result);
   }
 };
 
