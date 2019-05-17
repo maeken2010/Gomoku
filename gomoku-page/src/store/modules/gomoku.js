@@ -5,6 +5,8 @@ const state = {
   second_player: "",
   cells: [],
   records: [],
+  turn: 1, // 初手：1 後手：2
+  turn_number: 1,
   isEnd: false
 };
 
@@ -27,6 +29,16 @@ const mutations = {
   },
   pushRecord: (state, { n, m, turn, turn_number }) => {
     state.records.push({ x: n, y: m, turn, turn_number });
+  },
+  toggleTurn: state => {
+    state.turn = state.turn === 1 ? 2 : 1;
+  },
+  incrementTurnNumber: state => {
+    state.turn_number += 1;
+  },
+  resetGame: state => {
+    state.turn = 1;
+    state.turnNumber = 1;
   }
 };
 
@@ -45,6 +57,12 @@ const getters = {
       first_player: state.first_player,
       second_player: state.second_player
     };
+  },
+  turn: state => {
+    return state.turn;
+  },
+  turnNumber: state => {
+    return state.turn_number;
   }
 };
 
