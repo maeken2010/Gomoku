@@ -16,12 +16,15 @@ const mutations = {
     state.winner = result;
     state.isEnd = true;
   },
-  initCells: (state, { boardSize }) => {
+  initGame: (state, { boardSize }) => {
     state.cells = Array.from(new Array(boardSize), () =>
       new Array(boardSize).fill(0)
     );
     state.isEnd = false;
     state.winner = 0;
+    state.turn = 1;
+    state.turn_number = 1;
+    state.records = [];
   },
   changeCell: (state, { n, m, cellColor }) => {
     state.cells[n][m] = cellColor;
@@ -38,10 +41,6 @@ const mutations = {
   },
   incrementTurnNumber: state => {
     state.turn_number += 1;
-  },
-  resetGame: state => {
-    state.turn = 1;
-    state.turnNumber = 1;
   }
 };
 

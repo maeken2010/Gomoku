@@ -47,18 +47,14 @@ export default {
     ...mapGetters(["cells", "turn", "turnNumber", "winner"])
   },
   created: function() {
-    this.initCells({ boardSize: this.pickedSize });
+    this.initGame({ boardSize: this.pickedSize });
   },
   methods: {
-    ...mapMutations(["initCells", "resetGame"]),
-    initGame: function(size) {
-      this.initCells({ boardSize: size });
-      this.resetGame();
-    }
+    ...mapMutations(["initCells", "resetGame", "initGame"])
   },
   watch: {
     pickedSize: function(size) {
-      this.initGame(size);
+      this.initGame({ boardSize: size });
     }
   }
 };
