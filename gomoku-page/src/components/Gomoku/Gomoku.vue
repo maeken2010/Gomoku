@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="gomoku">
     <!-- this.cellsは２重配列であり、要素が変わっても更新を検知してくれないっぽい -->
     <!-- keyを指定して、ターンが変わったら(cellが押されたら)更新するようにした -->
     <board
@@ -7,13 +7,22 @@
       :cells="this.cells"
       :key="'turn' + this.turnNumber"
     ></board>
-    <game-info :turn="this.turn"></game-info>
-    <div v-for="(s, i) in this.boardSizeList" :key="i">
-      <input type="radio" :id="'radio' + s" :value="s" v-model="pickedSize" />
-      <label :for="s">{{ s }}</label>
-      <br />
+    <div>
+      <game-info :turn="this.turn"></game-info>
+      <div>
+        Select Board Size:
+        <div v-for="(s, i) in this.boardSizeList" :key="i">
+          <input
+            type="radio"
+            :id="'radio' + s"
+            :value="s"
+            v-model="pickedSize"
+          />
+          <label :for="s">{{ s }}</label>
+        </div>
+      </div>
+      <p>current size : {{ pickedSize }}</p>
     </div>
-    <p>current size : {{ pickedSize }}</p>
   </div>
 </template>
 
@@ -55,4 +64,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.gomoku {
+  display: flex;
+}
+</style>

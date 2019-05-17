@@ -64,13 +64,13 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .board {
   display: flex;
 }
 .cell {
-  width: 31px;
-  height: 31px;
-  border: solid 3px #000000;
+  width: 35px;
+  height: 35px;
+  border: solid 3px var(--base-color);
 }
 </style>

@@ -7,19 +7,19 @@ export default {
   props: ["color"],
   computed: {
     colorClass: function() {
-      return ["white", "red", "blue"][this.color];
+      return ["white", "first", "second"][this.color];
     }
   }
 };
 </script>
 
-<style scoped>
-.red {
-  background-color: red;
+<style lang="scss" scoped>
+.first {
+  background-color: var(--first-color);
 }
 
-.blue {
-  background-color: blue;
+.second {
+  background-color: var(--second-color);
 }
 
 .white {
